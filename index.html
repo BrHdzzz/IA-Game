@@ -7,20 +7,91 @@
 
         <link rel = "stylesheet" href = "styles/style.css">
 
-        <script src = "scripts/script.js" defer></script>
+        <script src = "scripts/script.js" type = "module" defer></script>
+        <script src = "scripts/options.js" defer></script>
         
         <link rel = "icon" type = "image/x-icon" href = "images/icon.png">
     </head>
 
     <body>
-        <main>
-            <div id = "welcome">
+        <div>
+            <hr id = "hr">
+        </div>
+
+        <main id = "main">
+            <div id = "welcome" style = "display: none;">
                 <h1>
                     Inteligencia Artificial (IA), Machine Learning (ML) y Deep Learning (DL)
                 </h1>
+                
+                <h2>
+                    El juego
+                </h2>
 
-                <button onclick = "">
+                <button id = "next">
                     Continuar
+                </button>
+            </div>
+
+            <div id = "register" style = "display: none;">
+                <p style = "font-style: italic;">
+                    "Primero obedecimos.
+                    
+                    <br>
+
+                    Luego aprendimos
+                    
+                    <br>
+
+                    Hoy decidimos.
+                    
+                    <br>
+
+                    Un algoritmo escribió tus gustos, tus miedos y tus pensamientos antes de que tú los conocieras.
+                
+                    <br>
+                    
+                    Pero, ¿puedes tú entenderla a ella?
+                    
+                    <br>
+
+                    Entra… y descubre si aún eres el que toma las decisiones."
+                </p>
+
+                <p style = "font-style: italic; text-align: end;">
+                    - Yo
+                </p>
+
+                <div>
+                    <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre">
+                </div>
+
+                <button id = "play">
+                    Continuar
+                </button>
+            </div>
+
+            <div id = "game" style = "display: none;" data-score = "0">
+                <div class = "opt" style = "display: flex; justify-content: space-between;">
+                    <div style = "text-align: start; width: 45vw;">
+                        <ol id = "left"></ol>
+                    </div>
+
+                    <div style = "text-align: end; width: 45vw;">
+                        <ol id = "right"></ol>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <p id = "r" style = "font-style: italic; text-align: center;"> </p>
+
+                <br>
+                <br>
+
+                <button id = "finish">
+                    Terminado
                 </button>
             </div>
         </main>
