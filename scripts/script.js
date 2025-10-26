@@ -39,13 +39,19 @@ async function saveScore(playerName, score) {
 
 var hr
 var main
+var rightOpt
+var leftOpt
 
 window.addEventListener("DOMContentLoaded", function () {
     hr = document.getElementById("hr")
 
     main = document.getElementById("main")
 
-    loadPage(document.getElementById("welcome"))
+    rightOpt = document.getElementById("right")
+
+    leftOpt = document.getElementById("left")
+
+    loadPage(document.getElementById("game"))
 })
 
 function loadPage (obj) {
@@ -98,30 +104,64 @@ document.querySelector("#play").addEventListener("click", function () {
     }
     else {
         showPage("register", "game")
-
-        main.style.display = "block"
-        main.style.alignItems = "flex-start"
     }
 })
+const n = []
 
-const scoreDiv = document.getElementById("r");
+for (let a = 0; a <= 10; a++) {
+    let random
 
-const observer = new MutationObserver((mutationsList, observer) => {
-    for (const mutation of mutationsList) {
-        if (mutation.type === "childList") {
-            const scoreText = scoreDiv.textContent.trim();
-            if (scoreText) {
-                const score = scoreText;
-                console.log("Score detectado:", score);
-                
-                if (playerName) {
-                    saveScore(playerName, score);
-                }
-
-                observer.disconnect();
-            }
-        }
+    do {
+        random = Math.floor(Math.random() * 10)
     }
-});
+    while (n.includes(random))
 
-observer.observe(scoreDiv, { childList: true, subtree: true });
+    n.push(random)
+}
+
+const n2 = []
+
+for (let b = 0; b <= 10; b++) {
+    let random
+
+    do {
+        random = Math.floor(Math.random() * 10)
+    }
+    while (n2.includes(random))
+
+    n2.push(random)
+}
+
+const left = [
+    [ "Inteligencia Artificial (IA)", n[0] ],
+    [ "Machine Learning (ML)", n[1] ],
+    [ "Deep Learning (DL)", n[2] ],
+    [ "Red Neuronal Artificial", n[3] ],
+    [ "Prueba de Turing", n[4] ],
+    [ "Big Data", n[5] ],
+    [ "Inteligencia Artificial Estrecha (IAE)", n[6] ],
+    [ "Inteligencia Artificial General (IAG)", n[7] ],
+    [ "Superinteligencia Artificial (SIA)", n[8] ],
+    [ "Ada Lovelace", n[9] ]
+]
+
+const right = [
+    [ "Sistema capaz de realizar tareas que requieren razonamiento, percepción y decisión, imitando funciones cognitivas humanas.", n[0], n2[0] ],
+    [ "Subconjunto de la IA que permite a las máquinas aprender de los datos sin necesidad de reglas explícitas.", n[1], n2[1] ],
+    [ "Rama del ML que usa redes neuronales con múltiples capas para aprender representaciones jerárquicas y complejas.", n[2], n2[2] ],
+    [ "Conjunto de nodos organizados en capas conectadas, que ajustan pesos y activaciones para procesar información.", n[3], n2[3] ],
+    [ "Evaluación ideada por Alan Turing para determinar si una máquina puede exhibir comportamiento inteligente similar al humano.", n[4], n2[4] ],
+    [ "Conjunto masivo de datos que impulsa el desarrollo del aprendizaje automático y los modelos de IA moderna.", n[5], n2[5] ],
+    [ "Tipo de IA enfocada en realizar tareas específicas, como reconocimiento facial o traducción automática.", n[6], n2[6] ],
+    [ "Tipo de IA que busca igualar el razonamiento humano y realizar cualquier tarea intelectual que un humano pueda hacer.", n[7], n2[7] ],
+    [ "Nivel hipotético de IA que superaría la inteligencia y capacidad humana en todos los aspectos cognitivos.", n[8], n2[8] ],
+    [ "Considerada la primera programadora, propuso que una máquina podía manipular símbolos y crear patrones más allá de simples cálculos numéricos.", n[9], n2[9] ]
+]
+
+leftOpt.innerHTML = "<ul>"
+
+for (let i = 0; i <= left; i++) {
+    leftOpt.innerHTML += "<li>" + left[i] + "</li>"
+}
+
+leftOpt.innerHTML = "</ul>"

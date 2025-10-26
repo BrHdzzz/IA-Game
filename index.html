@@ -8,7 +8,6 @@
         <link rel = "stylesheet" href = "styles/style.css">
 
         <script src = "scripts/script.js" type = "module" defer></script>
-        <script src = "scripts/options.js" defer></script>
         
         <link rel = "icon" type = "image/x-icon" href = "images/icon.png">
     </head>
@@ -71,28 +70,14 @@
                 </button>
             </div>
 
-            <div id = "game" style = "display: none;" data-score = "0">
-                <div class = "opt" style = "display: flex; justify-content: space-between;">
-                    <div style = "text-align: start; width: 45vw;">
-                        <ol id = "left"></ol>
-                    </div>
+            <div id = "game">
+                <div class = "opt">
+                    <div id = "left"></div>
 
-                    <div style = "text-align: end; width: 45vw;">
-                        <ol id = "right"></ol>
-                    </div>
+                    <div id = "right"></div>
                 </div>
-
-                <br>
-                <br>
-
-                <p id = "r" style = "font-style: italic; text-align: center;"> </p>
-
-                <br>
-                <br>
-
-                <button id = "finish">
-                    Terminado
-                </button>
+                <script>
+                </script>
             </div>
         </main>
     </body>

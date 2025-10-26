@@ -38,7 +38,6 @@ button {
     font-size: 1.5rem;
     border: none;
     padding: 20px;
-    margin-bottom: 2rem;
 }
 
 button:hover {
@@ -84,15 +83,10 @@ p {
     color: #fff;
 }
 
-li {
+ul li {
     font-size: 2rem;
     font-family: 'Courier New', Courier, monospace;
     color: #fff;
-}
-
-.ans {
-    width: 3rem;
-    margin-right: 1rem;
 }
 
 .fade-in {
