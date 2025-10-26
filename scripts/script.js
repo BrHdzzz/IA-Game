@@ -45,19 +45,24 @@ function showPage (idOld, idNew) {
     loadPage(idN)
 }
 
-function play () {
-    const playerName = document.getElementById("playerName").value.trim()
+function showAlert (msg, color) {
     const alert = document.getElementById("alert")
     const message = document.getElementById("message")
 
-    if (!playerName) {
-        message.style.color = "#ff0000"
-        message.innerHTML = "Ingrese su nombre"
+    message.style.color = color
+    message.innerHTML = msg
 
-        if (alert.classList.contains("fade-out")) alert.classList.remove("fade-out")
-        
-        alert.classList.add("fade-in")
-        alert.style.display = "flex"
+    if (alert.classList.contains("fade-out")) alert.classList.remove("fade-out")
+    
+    alert.classList.add("fade-in")
+    alert.style.display = "flex"
+}
+
+function play () {
+    const playerName = document.getElementById("playerName").value.trim()
+
+    if (!playerName) {
+        showAlert("Ingrese su nombre.", "#ff0000")
     }
     else {
         showPage("register", "game")
@@ -104,109 +109,51 @@ const sentence = [
     "Considerada la primera programadora, propuso que una máquina podía manipular símbolos y crear patrones más allá de simples cálculos numéricos."
 ]
 
-const options = document.getElementById("options")
-
-//const words = document.getElementById("word")
-//const sentences = document.getElementById("sentence")
+const ansList = []
 
 for (let i = 0; i < word.length; i++) {
-    options.innerHTML += "<div class = 'option'> <div> <p style = 'text-align: left;'>" + word[i] + "</p> </div> <div> <p style = 'text-align: right;'>" + sentence[i] + "</p> </div> </div>"
+    ansList.push(word[i] + sentence[i])
 }
 
-/* window.addEventListener("DOMContentLoaded", function () {
-    const lO = document.getElementById("left")
-    const rO = document.getElementById("right")
+const options = document.getElementById("options")
+const word_random = word.sort((a, b) => Math.random() - 0.5)
+const sentence_random = sentence.sort((a, b) => Math.random() - 0.5)
 
-    const n = []
+for (let i = 0; i < word_random.length; i++) {
+    options.innerHTML += "<div class = 'option'> <div class = 'col'> <input type = 'text' autocomplete = 'off' class = 'ans' id = 'ans" + i + "'> <p style = 'text-align: left;'>" + word_random[i] + "</p> </div> <div> <p style = 'text-align: right; display: flex; align-items: center;'>" + (i + 1) + ". " + sentence_random[i] + "</p> </div> </div>"
+}
 
-    for (let a = 0; a <= 9; a++) {
-        let random
+function finish () {
+    const answers = []
+    const ansPlayer = []
+    var score = 0
 
-        do {
-            random = Math.floor(Math.random() * 10)
+    for (let i = 0; i < word_random.length; i++) {
+        const indexAns = document.getElementById(`ans${i}`).value.trim()
+
+        if (!indexAns) {
+            showAlert("Complete todos los campos correctamente.", "#ff0000")
+
+            break
         }
-        while (n.includes(random))
+        else {
+            answers.push(sentence_random[parseInt(indexAns) - 1])
 
-        n.push(random)
-    }
+            if ((i + 1) === word_random.length) {
+                for (let x = 0; x < word_random.length; x++) {
+                    ansPlayer.push(word_random[x] + answers[x])
 
-    const n2 = []
+                    for (let j = 0; j < ansList.length; j++) {
+                        if (ansPlayer[x] === ansList[j]) {
+                            score++
+                        }
+                    }
+                }
 
-    for (let b = 0; b <= 9; b++) {
-        let random
+                showAlert("Puntuación: " + score + "/10", "#fff")
 
-        do {
-            random = Math.floor(Math.random() * 10)
-        }
-        while (n2.includes(random))
-
-        n2.push(random)
-    }
-
-    const left = [
-        [ "Inteligencia Artificial (IA)", n[0] ],
-        [ "Machine Learning (ML)", n[1] ],
-        [ "Deep Learning (DL)", n[2] ],
-        [ "Red Neuronal Artificial", n[3] ],
-        [ "Prueba de Turing", n[4] ],
-        [ "Big Data", n[5] ],
-        [ "Inteligencia Artificial Estrecha (IAE)", n[6] ],
-        [ "Inteligencia Artificial General (IAG)", n[7] ],
-        [ "Superinteligencia Artificial (SIA)", n[8] ],
-        [ "Ada Lovelace", n[9] ]
-    ]
-
-    const right = [
-        [ "<div><input class = 'ans' type = 'text' id = 'ans0'></div><div>Sistema capaz de realizar tareas que requieren razonamiento, percepción y decisión, imitando funciones cognitivas humanas.</div>", n[0], n2[0] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans1'></div><div>Subconjunto de la IA que permite a las máquinas aprender de los datos sin necesidad de reglas explícitas.</div>", n[1], n2[1] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans2'></div><div>Rama del ML que usa redes neuronales con múltiples capas para aprender representaciones jerárquicas y complejas.</div>", n[2], n2[2] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans3'></div><div>Conjunto de nodos organizados en capas conectadas, que ajustan pesos y activaciones para procesar información.</div>", n[3], n2[3] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans4'></div><div>Evaluación ideada por Alan Turing para determinar si una máquina puede exhibir comportamiento inteligente similar al humano.</div>", n[4], n2[4] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans5'></div><div>Conjunto masivo de datos que impulsa el desarrollo del aprendizaje automático y los modelos de IA moderna.</div>", n[5], n2[5] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans6'></div><div>Tipo de IA enfocada en realizar tareas específicas, como reconocimiento facial o traducción automática.</div>", n[6], n2[6] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans7'></div><div>Tipo de IA que busca igualar el razonamiento humano y realizar cualquier tarea intelectual que un humano pueda hacer.</div>", n[7], n2[7] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans8'></div><div>Nivel hipotético de IA que superaría la inteligencia y capacidad humana en todos los aspectos cognitivos.</div>", n[8], n2[8] ],
-        [ "<div><input class = 'ans' type = 'text' id = 'ans9'></div><div>Considerada la primera programadora, propuso que una máquina podía manipular símbolos y crear patrones más allá de simples cálculos numéricos.</div>", n[9], n2[9] ]
-    ]
-
-    const ansL = new Array(10)
-
-    for (let i = 0; i < left.length; i++) {
-        ansL[left[i][1]] = left [i][0]
-    }
-
-    for (let i = 0; i < ansL.length; i++) {
-        lO.innerHTML += "<li> <div> <input class = 'ans' type = 'text' autocomplete = 'off' id = ''>" + ansL[i] + "</div> </li>"
-    }
-
-    const ansR = new Array(10);
-
-    for (let i = 0; i < right.length; i++) {
-        ansR[right[i][2]] = right[i][0]
-    }
-
-    for (let i = 0; i < ansR.length; i++) {
-        rO.innerHTML += "<li style = 'display: flex;'>" + ansR[i] + "</li>"
-    }
-
-    window.score = 0
-
-    document.querySelector("#finish").addEventListener("click", function () {
-        var score = 0
-        const r = document.getElementById("r")
-
-        for (let i = 0; i <= 9; i++) {
-            const input = document.getElementById(`ans${i}`)
-
-            if (!input) continue
-
-            const correctI = right[i][2]
-
-            if (parseInt(input.value.trim()) === correctI) {
-                score++;
+                window.score = score
             }
         }
-
-        r.innerHTML = "Puntuación: " +  score + "/10"
-    })
-}) */
+    }
+}

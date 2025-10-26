@@ -38,25 +38,16 @@ async function saveScore(playerName, score) {
 }
 
 var playerName
+var score
 
-const scoreDiv = document.getElementById("r");
+document.querySelector("#playerNameButton").addEventListener("click", function () {
+    playerName = document.getElementById("playerName").value.trim();
+    console.log(playerName)
+})
 
-const observer = new MutationObserver((mutationsList, observer) => {
-    for (const mutation of mutationsList) {
-        if (mutation.type === "childList") {
-            const scoreText = scoreDiv.textContent.trim();
-            if (scoreText) {
-                const score = scoreText;
-                console.log("Score detectado:", score);
-                
-                if (playerName) {
-                    saveScore(playerName, score);
-                }
+document.querySelector("#closeAlert").addEventListener("click", function () {
+    score = window.score
+    console.log(score)
 
-                observer.disconnect();
-            }
-        }
-    }
-});
-
-observer.observe(scoreDiv, { childList: true, subtree: true });
+    saveScore(playerName, score)
+})

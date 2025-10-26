@@ -67,7 +67,7 @@
                     <div>
                         <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre" autocomplete = "off">
 
-                        <button onclick = "play()">
+                        <button id = "playerNameButton" onclick = "play()">
                             Continuar
                         </button>
                     </div>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div style = "width: 100%; display: flex; justify-content: center;">
-                    <button id = "finish" style = "margin: 1rem;">
+                    <button id = "finish" onclick = "finish()" style = "margin: 1rem;">
                         Terminado
                     </button>
                 </div>
@@ -87,9 +87,9 @@
 
             <div id = "alert" class = "alert">
                 <div>
-                    <p id = "message">Ingrese su nombre</p>
+                    <p id = "message"></p>
                     
-                    <button onclick = "closeAlert()">
+                    <button id = "closeAlert" onclick = "closeAlert()">
                         Cerrar
                     </button>
                 </div>
