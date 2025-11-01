@@ -15,6 +15,10 @@ main {
     height: 100vh;
 }
 
+div {
+    text-align: center;
+}
+
 h1 {
     font-size: 3rem;
     color: #1100ff;
@@ -34,7 +38,6 @@ button {
     font-size: 1.5rem;
     border: none;
     padding: 20px;
-    margin: 0;
 }
 
 button:hover {
@@ -66,18 +69,12 @@ hr {
 input {
     font-size: 2rem;
     font-family: 'Courier New', Courier, monospace;
-    text-align: center;
     background-color: #202020;
     color: #fff;
-    border: 1px solid #fff;
+    border: none;
     outline: none;
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 0.5rem;
-}
-
-::placeholder {
-    color: #fff;
 }
 
 p {
@@ -86,85 +83,10 @@ p {
     color: #fff;
 }
 
-li {
+ul li {
     font-size: 2rem;
     font-family: 'Courier New', Courier, monospace;
     color: #fff;
-}
-
-.ans {
-    width: 3rem;
-    margin: 1rem;
-    background-color: #000;
-    border: #7700ff solid 1px;
-}
-
-
-.alert {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    backdrop-filter: blur(1rem);
-    height: 100%;
-    width: 100%;
-}
-
-.alert div {
-    background: #000;
-    border: 1px solid #fff;
-    border-radius: 1rem;
-    text-align: center;
-    padding: 2rem;
-}
-
-.alert button {
-    background-color: #05004b;
-    padding: 1rem 3rem;
-}
-
-.alert p {
-    height: 40vh;
-    width: 50vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.playerName {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.playerName div {
-    width: 30vw;
-    display: grid;
-}
-
-.option {
-    height: auto;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-.option div {
-    background-color: #202020;
-    border: #0000FF solid 2px;
-    border-radius: 1rem;
-    margin: 10px;
-    padding: 1rem;
-}
-
-.option p {
-    margin: 0;
-    padding: 0;
-}
-
-.col {
-    display: flex;
-    align-items: center;
 }
 
 .fade-in {
@@ -198,72 +120,5 @@ li {
 @keyframes shine {
     to {
         background-position: 150% center;
-    }
-}
-
-@media (width < 1000px) {
-    main {
-        margin: 1rem;
-        height: 100vh;
-    }
-    
-    h1 {
-        font-size: 3.5rem;
-    }
-
-    h2 {
-        font-size: 3rem;
-    }
-    
-    p {
-        font-size: 2rem;
-    }
-
-    input {
-        font-size: 2.5rem;
-        padding: 2rem;
-    }
-    
-    button {
-        font-size: 2.5rem;
-        margin: 1rem 0;
-        padding: 2rem;
-        width: 100%;
-    }
-
-    .playerName div {
-        width: 100%;
-    }
-
-    .alert {
-        display: none;
-        width: 100vw;
-        height: 100vh;
-    }
-
-    .alert p {
-        width: 90vw;
-        height: 20vh;
-    }
-
-    .option {
-        display: grid;
-    }
-    
-    .option div:checked {
-        transform: scale(1rem);
-    }
-
-    .col {
-        display: grid;
-        grid-template-rows: auto auto;
-    }
-
-    .col input {
-        width: 30%;
-    }
-    
-    .col p {
-        margin: 0 1rem;
     }
 }

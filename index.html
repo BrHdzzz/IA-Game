@@ -6,12 +6,10 @@
         </title>
 
         <link rel = "stylesheet" href = "styles/style.css">
+
+        <script src = "scripts/script.js" type = "module" defer></script>
         
         <link rel = "icon" type = "image/x-icon" href = "images/icon.png">
-
-        <script src = "scripts/script.js" defer></script>
-
-        <script src = "scripts/db.js" type = "module" defer></script>
     </head>
 
     <body>
@@ -20,26 +18,22 @@
         </div>
 
         <main id = "main">
-            <div id = "welcome" style = "display: none; text-align: center;">
+            <div id = "welcome" style = "display: none;">
                 <h1>
                     Inteligencia Artificial (IA), Machine Learning (ML) y Deep Learning (DL)
                 </h1>
                 
                 <h2>
-                    Relacionar columnas
+                    El juego
                 </h2>
 
-                <p>
-                    Versión 2.0
-                </p>
-
-                <button onclick = "showPage('welcome', 'register')">
+                <button id = "next">
                     Continuar
                 </button>
             </div>
 
             <div id = "register" style = "display: none;">
-                <p style = "font-style: italic; text-align: center;">
+                <p style = "font-style: italic;">
                     "Primero obedecimos.
                     
                     <br>
@@ -63,40 +57,27 @@
                     Entra… y descubre si aún eres el que toma las decisiones."
                 </p>
 
-                <p style = "font-style: italic; text-align: right;">
+                <p style = "font-style: italic; text-align: end;">
                     - Yo
                 </p>
 
-                <div class = "playerName">
-                    <div>
-                        <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre" autocomplete = "off">
-
-                        <button id = "playerNameButton" onclick = "play()">
-                            Continuar
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id = "game" style = "display: none; height: 100vh;">
-                <div id = "options">
-                </div>
-
-                <div style = "width: 100%; display: flex; justify-content: center;">
-                    <button id = "finish" onclick = "finish()" style = "margin: 1rem;">
-                        Terminado
-                    </button>
-                </div>
-            </div>
-
-            <div id = "alert" class = "alert">
                 <div>
-                    <p id = "message"></p>
-                    
-                    <button id = "closeAlert" onclick = "closeAlert()">
-                        Cerrar
-                    </button>
+                    <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre">
                 </div>
+
+                <button id = "play">
+                    Continuar
+                </button>
+            </div>
+
+            <div id = "game">
+                <div class = "opt">
+                    <div id = "left"></div>
+
+                    <div id = "right"></div>
+                </div>
+                <script>
+                </script>
             </div>
         </main>
     </body>
