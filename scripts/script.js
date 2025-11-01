@@ -1,57 +1,12 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyCs8QUfI3ZoaNwcBtSld-GdUIbfyToMbzg",
-    authDomain: "ia-game-e33cb.firebaseapp.com",
-    projectId: "ia-game-e33cb",
-    storageBucket: "ia-game-e33cb.firebasestorage.app",
-    messagingSenderId: "209623893057",
-    appId: "1:209623893057:web:806ce7f3d083e8689472c0",
-    measurementId: "G-0VS8XQR5LH"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-import { getFirestore, collection, addDoc, query, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-const db = getFirestore(app);
-
-async function saveScore(playerName, score) {
-    try {
-        await addDoc (collection (db, "scores"), {
-            player: playerName,
-            score: score
-        })
-
-        console.log("Score saved.")
-    }
-    catch (err) {
-        console.error("Score unsaved. ", err)
-    }
-}
-
 var hr
 var main
-var rightOpt
-var leftOpt
 
 window.addEventListener("DOMContentLoaded", function () {
     hr = document.getElementById("hr")
 
     main = document.getElementById("main")
 
-    rightOpt = document.getElementById("right")
-
-    leftOpt = document.getElementById("left")
-
-    loadPage(document.getElementById("game"))
+    loadPage(document.getElementById("welcome"))
 })
 
 function loadPage (obj) {
@@ -78,7 +33,7 @@ function loadPage (obj) {
 
             main.style.display = "flex"
         }
-    }, 0)
+    }, 10)
 }
 
 function showPage (idOld, idNew) {
@@ -90,78 +45,115 @@ function showPage (idOld, idNew) {
     loadPage(idN)
 }
 
-document.querySelector("#next").addEventListener("click", function () {
-    showPage("welcome", "register")
-})
+function showAlert (msg, color) {
+    const alert = document.getElementById("alert")
+    const message = document.getElementById("message")
 
-var playerName
+    message.style.color = color
+    message.innerHTML = msg
 
-document.querySelector("#play").addEventListener("click", function () {
-    playerName = document.getElementById("playerName").value.trim()
+    if (alert.classList.contains("fade-out")) alert.classList.remove("fade-out")
+    
+    alert.classList.add("fade-in")
+    alert.style.display = "flex"
+}
+
+function play () {
+    const playerName = document.getElementById("playerName").value.trim()
 
     if (!playerName) {
-        alert("Ingrese un nombre.")
+        showAlert("Ingrese su nombre.", "#ff0000")
     }
     else {
         showPage("register", "game")
     }
-})
-const n = []
-
-for (let a = 0; a <= 10; a++) {
-    let random
-
-    do {
-        random = Math.floor(Math.random() * 10)
-    }
-    while (n.includes(random))
-
-    n.push(random)
 }
 
-const n2 = []
+function closeAlert () {
+    const alert = document.getElementById("alert")
 
-for (let b = 0; b <= 10; b++) {
-    let random
+    if (alert.classList.contains("fade-in")) alert.classList.remove("fade-in")
+        
+    alert.classList.add("fade-out")
 
-    do {
-        random = Math.floor(Math.random() * 10)
-    }
-    while (n2.includes(random))
+    alert.addEventListener("animationend", function a () {
+        alert.style.display = "none"
 
-    n2.push(random)
+        alert.removeEventListener("animationend", a)
+    })
 }
 
-const left = [
-    [ "Inteligencia Artificial (IA)", n[0] ],
-    [ "Machine Learning (ML)", n[1] ],
-    [ "Deep Learning (DL)", n[2] ],
-    [ "Red Neuronal Artificial", n[3] ],
-    [ "Prueba de Turing", n[4] ],
-    [ "Big Data", n[5] ],
-    [ "Inteligencia Artificial Estrecha (IAE)", n[6] ],
-    [ "Inteligencia Artificial General (IAG)", n[7] ],
-    [ "Superinteligencia Artificial (SIA)", n[8] ],
-    [ "Ada Lovelace", n[9] ]
+const word = [
+    "Inteligencia Artificial (IA)",
+    "Machine Learning (ML)",
+    "Deep Learning (DL)",
+    "Red Neuronal Artificial",
+    "Prueba de Turing",
+    "Big Data",
+    "Inteligencia Artificial Estrecha (IAE)",
+    "Inteligencia Artificial General (IAG)",
+    "Superinteligencia Artificial (SIA)",
+    "Ada Lovelace"
 ]
 
-const right = [
-    [ "Sistema capaz de realizar tareas que requieren razonamiento, percepción y decisión, imitando funciones cognitivas humanas.", n[0], n2[0] ],
-    [ "Subconjunto de la IA que permite a las máquinas aprender de los datos sin necesidad de reglas explícitas.", n[1], n2[1] ],
-    [ "Rama del ML que usa redes neuronales con múltiples capas para aprender representaciones jerárquicas y complejas.", n[2], n2[2] ],
-    [ "Conjunto de nodos organizados en capas conectadas, que ajustan pesos y activaciones para procesar información.", n[3], n2[3] ],
-    [ "Evaluación ideada por Alan Turing para determinar si una máquina puede exhibir comportamiento inteligente similar al humano.", n[4], n2[4] ],
-    [ "Conjunto masivo de datos que impulsa el desarrollo del aprendizaje automático y los modelos de IA moderna.", n[5], n2[5] ],
-    [ "Tipo de IA enfocada en realizar tareas específicas, como reconocimiento facial o traducción automática.", n[6], n2[6] ],
-    [ "Tipo de IA que busca igualar el razonamiento humano y realizar cualquier tarea intelectual que un humano pueda hacer.", n[7], n2[7] ],
-    [ "Nivel hipotético de IA que superaría la inteligencia y capacidad humana en todos los aspectos cognitivos.", n[8], n2[8] ],
-    [ "Considerada la primera programadora, propuso que una máquina podía manipular símbolos y crear patrones más allá de simples cálculos numéricos.", n[9], n2[9] ]
+const sentence = [
+    "Sistema capaz de realizar tareas que requieren razonamiento, percepción y decisión, imitando funciones cognitivas humanas.",
+    "Subconjunto de la IA que permite a las máquinas aprender de los datos sin necesidad de reglas explícitas.",
+    "Rama del ML que usa redes neuronales con múltiples capas para aprender representaciones jerárquicas y complejas.",
+    "Conjunto de nodos organizados en capas conectadas, que ajustan pesos y activaciones para procesar información.",
+    "Evaluación ideada por Alan Turing para determinar si una máquina puede exhibir comportamiento inteligente similar al humano.",
+    "Conjunto masivo de datos que impulsa el desarrollo del aprendizaje automático y los modelos de IA moderna.",
+    "Tipo de IA enfocada en realizar tareas específicas, como reconocimiento facial o traducción automática.",
+    "Tipo de IA que busca igualar el razonamiento humano y realizar cualquier tarea intelectual que un humano pueda hacer.",
+    "Nivel hipotético de IA que superaría la inteligencia y capacidad humana en todos los aspectos cognitivos.",
+    "Considerada la primera programadora, propuso que una máquina podía manipular símbolos y crear patrones más allá de simples cálculos numéricos."
 ]
 
-leftOpt.innerHTML = "<ul>"
+const ansList = []
 
-for (let i = 0; i <= left; i++) {
-    leftOpt.innerHTML += "<li>" + left[i] + "</li>"
+for (let i = 0; i < word.length; i++) {
+    ansList.push(word[i] + sentence[i])
 }
 
-leftOpt.innerHTML = "</ul>"
+const options = document.getElementById("options")
+const word_random = word.sort((a, b) => Math.random() - 0.5)
+const sentence_random = sentence.sort((a, b) => Math.random() - 0.5)
+
+for (let i = 0; i < word_random.length; i++) {
+    options.innerHTML += "<div class = 'option'> <div class = 'col'> <input type = 'text' autocomplete = 'off' class = 'ans' id = 'ans" + i + "'> <p style = 'text-align: left;'>" + word_random[i] + "</p> </div> <div> <p style = 'text-align: right; display: flex; align-items: center;'>" + (i + 1) + ". " + sentence_random[i] + "</p> </div> </div>"
+}
+
+function finish () {
+    const answers = []
+    const ansPlayer = []
+    var score = 0
+
+    for (let i = 0; i < word_random.length; i++) {
+        const indexAns = document.getElementById(`ans${i}`).value.trim()
+
+        if (!indexAns) {
+            showAlert("Complete todos los campos correctamente.", "#ff0000")
+
+            break
+        }
+        else {
+            answers.push(sentence_random[parseInt(indexAns) - 1])
+
+            if ((i + 1) === word_random.length) {
+                for (let x = 0; x < word_random.length; x++) {
+                    ansPlayer.push(word_random[x] + answers[x])
+
+                    for (let j = 0; j < ansList.length; j++) {
+                        if (ansPlayer[x] === ansList[j]) {
+                            score++
+                        }
+                    }
+                }
+
+                showAlert("Puntuación: " + score + "/10", "#fff")
+
+                window.score = score
+            }
+        }
+    }
+}

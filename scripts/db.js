@@ -37,6 +37,41 @@ async function saveScore(playerName, score) {
     }
 }
 
+async function getScores() {
+    try {
+        const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(10))
+        const qS = await getDocs(q)
+
+        const scores = []
+
+        qS.forEach((doc) => {
+            scores.push(doc.data())
+        })
+
+        return scores
+    }
+    catch (err) {
+        console.error("Error", err)
+    }
+}
+
+export async function showScores() {
+    const scores = await getScores()
+    const sList = document.getElementById("scores")
+
+    sList.innerHTML = ""
+
+    scores.forEach(function (s) {
+        const li = document.createElement("li")
+
+        li.textContent = `${s.player}: ${s.score}`
+
+        sList.appendChild(li)
+    })
+}
+
+window.showScores = showScores
+
 var playerName
 var score
 

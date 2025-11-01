@@ -6,10 +6,12 @@
         </title>
 
         <link rel = "stylesheet" href = "styles/style.css">
-
-        <script src = "scripts/script.js" type = "module" defer></script>
         
         <link rel = "icon" type = "image/x-icon" href = "images/icon.png">
+
+        <script src = "scripts/script.js" defer></script>
+
+        <script src = "scripts/db.js" type = "module" defer></script>
     </head>
 
     <body>
@@ -18,22 +20,39 @@
         </div>
 
         <main id = "main">
-            <div id = "welcome" style = "display: none;">
+            <div id = "welcome" style = "display: none; text-align: center;">
                 <h1>
                     Inteligencia Artificial (IA), Machine Learning (ML) y Deep Learning (DL)
                 </h1>
                 
                 <h2>
-                    El juego
+                    Relacionar columnas
                 </h2>
 
-                <button id = "next">
+                <p>
+                    Versión 2.1
+                </p>
+
+                <button onclick = "showPage('welcome', 'register')">
                     Continuar
+                </button>
+
+                <button onclick = "showPage('welcome', 'scoresList')">
+                    Puntajes
                 </button>
             </div>
 
+            <div id = "scoresList" style = "display: none;">
+                <h1 style = "margin: 0; padding: 0 0 5rem 0;">
+                    Puntajes:
+                </h1>
+
+                <ol id = "scores">
+                </ol>
+            </div>
+
             <div id = "register" style = "display: none;">
-                <p style = "font-style: italic;">
+                <p style = "font-style: italic; text-align: center;">
                     "Primero obedecimos.
                     
                     <br>
@@ -57,28 +76,47 @@
                     Entra… y descubre si aún eres el que toma las decisiones."
                 </p>
 
-                <p style = "font-style: italic; text-align: end;">
+                <p style = "font-style: italic; text-align: right;">
                     - Yo
                 </p>
 
-                <div>
-                    <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre">
-                </div>
+                <div class = "playerName">
+                    <div>
+                        <input type = "text" id = "playerName" name = "playerName" placeholder = "Nombre" autocomplete = "off">
 
-                <button id = "play">
-                    Continuar
-                </button>
+                        <button id = "playerNameButton" onclick = "play()">
+                            Continuar
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div id = "game">
-                <div class = "opt">
-                    <div id = "left"></div>
-
-                    <div id = "right"></div>
+            <div id = "game" style = "display: none; height: 100vh;">
+                <div id = "options">
                 </div>
-                <script>
-                </script>
+
+                <div style = "width: 100%; display: flex; justify-content: center;">
+                    <button id = "finish" onclick = "finish()" style = "margin: 1rem;">
+                        Terminado
+                    </button>
+                </div>
+            </div>
+
+            <div id = "alert" class = "alert">
+                <div>
+                    <p id = "message"></p>
+                    
+                    <button id = "closeAlert" onclick = "closeAlert()">
+                        Cerrar
+                    </button>
+                </div>
             </div>
         </main>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (window.showScores) window.showScores()
+            })
+        </script>
     </body>
 </html>
